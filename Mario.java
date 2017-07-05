@@ -8,6 +8,7 @@ public class Mario {
 
     public static void main(String[] args) {
         int n;
+        String output_choice;
         Scanner console = new Scanner(System.in);
 
         do {
