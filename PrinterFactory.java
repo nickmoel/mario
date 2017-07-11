@@ -21,25 +21,3 @@ public class PrinterFactory {
 
 
 }
-    /* public static Printer console() { */
-       // return new ConsolePrinter();
-    //}
-
-
-
-
-
-
-        /*
-       if (output_choice.equals("c")) {
-       Printer choice;
-       choice = new Console();
-       } else {
-       Printer choice = new SaveFile();
-       }
-       */
-
-
-        //return Printer choice;
-       // Printer choice = "console".equals(output_choice) ? PrinterFactory.console() : PrinterFactory.saveFile()
-
