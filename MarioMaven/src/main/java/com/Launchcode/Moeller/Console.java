@@ -8,9 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Console implements Printer {
     public Console(){    }
-    public Console(com.Launchcode.Moeller.Console console){
-        this.console = console;
-    }
+    
     private static Console console;
 
     public static Console getInstance(){
