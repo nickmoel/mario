@@ -1,4 +1,3 @@
-package mario;
 import java.io.*;
 
 /**
@@ -12,8 +11,8 @@ public class PyramidFilePrinter implements PyramidPrinter {
     @Override
     public void print(StringBuilder sb) {
         File file  = new File("Mario.txt");
-        try (BufferedWriter Bw = new BufferedWriter(new FileWriter(file.getAbsoluteFile()));) {
-            Bw.write(sb.toString());
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file.getAbsoluteFile()));) {
+            bw.write(sb.toString());
             System.out.print("File Saved");
 
         } catch (IOException e) {
