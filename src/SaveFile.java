@@ -1,5 +1,3 @@
-package Mario;
-
 import java.io.*;
 
 /**

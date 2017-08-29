@@ -1,5 +1,3 @@
-package Mario;
-
 /**
  * Created by Nick on 6/30/2017.
  */
