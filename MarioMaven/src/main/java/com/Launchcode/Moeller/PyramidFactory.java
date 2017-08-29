@@ -5,8 +5,7 @@ package com.Launchcode.Moeller;
  */
 public class PyramidFactory {
     public static Pyramid withRows(int rows) {
-        Pyramid pyramid = new Pyramid();
-        pyramid.setRows(rows);
+        Pyramid pyramid = new Pyramid(rows);
 
         return pyramid;
     }

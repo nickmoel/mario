@@ -7,12 +7,11 @@ public class Pyramid {
 
     private int rows;
 
-    public Pyramid() {
-    }
-
-    public void setRows( int rows ) {
+    public Pyramid(int rows) {
         this.rows = rows;
     }
+
+
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
