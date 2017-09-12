@@ -1,5 +1,4 @@
-package Mario;
-
+package com.Launchcode.Moeller;
 import java.io.*;
 
 /**
@@ -7,7 +6,14 @@ import java.io.*;
  */
 public class SaveFile implements Printer {
 
-    public SaveFile() {
+    private static SaveFile savefile;
+
+    public static SaveFile getInstance(){
+
+        if (savefile == null){
+            savefile = new SaveFile();
+        }
+        return savefile;
     }
 
     @Override

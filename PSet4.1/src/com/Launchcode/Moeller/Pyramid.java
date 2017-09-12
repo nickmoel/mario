@@ -1,5 +1,4 @@
-package Mario;
-
+package com.Launchcode.Moeller;
 /**
  * Created by Nick on 6/30/2017.
  */
@@ -7,10 +6,7 @@ public class Pyramid {
 
     private int rows;
 
-    public Pyramid() {
-    }
-
-    public void setRows( int rows ) {
+    public Pyramid(int rows) {
         this.rows = rows;
     }
 

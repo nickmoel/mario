@@ -1,5 +1,4 @@
-package Mario;
-
+package com.Launchcode.Moeller;
 /**
  * Created by Nick on 6/30/2017.
  */
@@ -19,7 +18,6 @@ public class Mario {
         }
         while (n < 0 || n > 23);
 
-
         do {
             System.out.print("press c for console or f for text file:");
             output_choice = console.next();
@@ -28,4 +26,5 @@ public class Mario {
         PrinterFactory.createPrinter(output_choice).print(PyramidFactory.withRows(n));
 
     }
-   }
+}
+
