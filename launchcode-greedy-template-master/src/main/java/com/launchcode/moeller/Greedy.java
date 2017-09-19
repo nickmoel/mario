@@ -34,11 +34,11 @@ public class Greedy {
         System.out.println("Enter your currency as $0.00 or €0.00");
         Scanner console = new Scanner(System.in);
         input_amount = console.nextLine();
-        Validation(input_amount);
+        validation(input_amount);
 
     }
 
-    public static boolean Validation(String input_amount) {
+    public static boolean validation(String input_amount) {
 
         if (input_amount.matches("^[$€]\\d+\\.\\d{2}$")) {
             System.out.println("You entered: " + input_amount);
