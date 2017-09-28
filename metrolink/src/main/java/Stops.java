@@ -4,12 +4,11 @@ import java.util.List;
 /**
  * Created by Nick on 9/21/2017.
  */
-public class Route {
+public class Stops {
     private List<Station> RouteStops;
-    //Output list of Stations.
-    //Move to Route Object
 
-    public Route(){
+
+    public Stops(){
         RouteStops = SqliteJDBCDao.getInstance().getStopsAllStops();
     }
 
@@ -31,8 +30,8 @@ public class Route {
     }
 
     public String getNextArrival(int user_input){
-
         getStation(user_input);
+
        List<String> arrivals = SqliteJDBCDao.getInstance().getArrivals();
         int i = 0;
         String arrivalTime = arrivals.get(i);
