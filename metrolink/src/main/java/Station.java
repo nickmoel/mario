@@ -1,9 +1,11 @@
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 /**
  * Created by Nick on 9/14/2017.
  */
-
+@Component
 public class Station {
     private String stationName;
     private static String id;

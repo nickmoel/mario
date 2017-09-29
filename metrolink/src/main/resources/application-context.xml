@@ -1,0 +1,31 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+
+        <bean id = "metrolinkCommandLineApp" class = "MetrolinkCommandLineApp">
+                <constructor-arg ref = "validation"/>
+        </bean>
+
+        <bean id = "validation" class = "Validation">
+                <constructor-arg ref = "stops"/>
+
+        </bean>
+
+        <bean id = "stops" class = "Stops">
+                <constructor-arg ref = "station"/>
+                <constructor-arg ref = "sqlitejdbcdao"/>
+        </bean>
+
+
+
+        <bean id = "station" class = "Station">
+                <constructor-arg ref = "sqlitejdbcdao"/>
+        </bean>
+
+        <bean id = "sqlitejdbcdao" class = "SqliteJDBCDAO">
+        </bean>
+
+</beans>

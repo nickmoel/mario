@@ -1,3 +1,5 @@
+import org.springframework.stereotype.Component;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -5,7 +7,7 @@ import java.util.List;
 /**
  * Created by Nick on 9/8/2017.
  */
-
+@Component
 public class SqliteJDBCDao implements MetrolinkDao {
 
     public static final String JDBC_SQLITE_METROLINK_DB = "jdbc:sqlite:metrolink.db";
