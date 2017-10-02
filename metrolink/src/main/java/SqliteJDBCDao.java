@@ -14,6 +14,8 @@ public class SqliteJDBCDao implements MetrolinkDao {
     public static final String ORG_SQLITE_JDBC = "org.sqlite.JDBC";
     private static SqliteJDBCDao dao;
 
+    public SqliteJDBCDao(){    }
+
     public static SqliteJDBCDao getInstance() {
         if (dao == null) {
             dao = new SqliteJDBCDao();
@@ -24,7 +26,7 @@ public class SqliteJDBCDao implements MetrolinkDao {
     public List<Station> getStopsAllStops() {//retrieves stations
 
         try (Connection connection = getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT stops.stop_id, stops.stop_name FROM stops WHERE stop_name LIKE '%METROLINK STATION%' ORDER BY stop_name asc");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT stops.stop_id, stops.stop_name FROM stops WHERE stop_name LIKE '%METROLINK STATION%' ORDER BY stop_name ASC");
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Station> stops = new ArrayList<>();
             while (resultSet.next()) {
@@ -41,8 +43,8 @@ public class SqliteJDBCDao implements MetrolinkDao {
 
     public List<String> getArrivals() {//retrieves arrival times
        try (Connection conn = getConnection()) {
-            PreparedStatement statement = conn.prepareStatement("SELECT DISTINCT arrival_time FROM stop_times WHERE stop_id = '" + Station.getID()
-                    + "' AND arrival_time > (SELECT strftime('%H:%M:%S',datetime(strftime('%s','now'),'unixepoch','localtime'))) ORDER BY arrival_time LIMIT 1;");
+            PreparedStatement statement = conn.prepareStatement("SELECT arrival_time FROM stop_times WHERE stop_id = '" + Station.getID()
+                    + "' AND arrival_time > time('now', 'localtime') ORDER BY arrival_time asc;");
            ResultSet resultSet = statement.executeQuery();
             List<String> arrivals = new ArrayList<String>();
             while (resultSet.next()) {

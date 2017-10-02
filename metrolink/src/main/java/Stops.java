@@ -10,7 +10,7 @@ public class Stops {
     private List<Station> RouteStops;
 
     public Stops() {
-        RouteStops = SqliteJDBCDao.getInstance().getStopsAllStops();
+        RouteStops = new SqliteJDBCDao().getStopsAllStops();//SqliteJDBCDao.getInstance().getStopsAllStops();
     }
 
     public void outputStations() {//list stations
@@ -23,25 +23,20 @@ public class Stops {
         }
     }
 
-    public Station getStation(int user_input) {
-        return RouteStops.get(user_input);
-    }
-
-    public String getStationName(int user_input) {
+    public String getStationName(int user_input) {// retrieve station name using user input from stored list
         return RouteStops.get(user_input).getStationName();
     }
 
-    public String getNextArrival(int user_input) {
-        getStation(user_input);
+    public String getNextArrival(int user_input) {//retrieve next arrival time from user's station
 
-        List<String> arrivals = SqliteJDBCDao.getInstance().getArrivals();
-        int i = 0;
-        String arrivalTime = arrivals.get(i);
-        //while(LocalTime.parse(arrivalTime).isBefore(LocalTime.now())){
-        // arrivalTime = arrivals.get(i);
-        //i++;
+       getStationName(user_input);
+
+        List<String> arrivals = new SqliteJDBCDao().getArrivals();//SqliteJDBCDao.getInstance().getArrivals();
+        String arrivalTime = arrivals.get(user_input);
+
         return arrivalTime;
+        }
     }
-}
+
 
 

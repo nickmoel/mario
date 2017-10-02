@@ -1,7 +1,5 @@
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 /**
  * Created by Nick on 9/14/2017.
  */
@@ -9,9 +7,6 @@ import java.util.List;
 public class Station {
     private String stationName;
     private static String id;
-    public List<String> PassengerStation;
-
-    public Station () { PassengerStation = SqliteJDBCDao.getInstance().getArrivals();}
 
     void setName(String name) {
         this.stationName = name;
