@@ -3,12 +3,23 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-        <bean id = "metrolinkCommandLineApp" class = "MetrolinkCommandLineApp">
+
+
+<bean id = "metrolinkCommandLineApp" class = "MetrolinkCommandLineApp">
                 <constructor-arg ref = "validation"/>
+
+                <property name="stops" ref="stops"/>
         </bean>
 
         <bean id = "validation" class = "Validation">
+            <property name="metroStops" ref="stops"/>
+        </bean>
+
+        <bean id = "stops" class = "Stops">
 
         </bean>
+
+
+
 
 </beans>

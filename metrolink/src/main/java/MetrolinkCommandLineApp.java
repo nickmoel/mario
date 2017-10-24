@@ -11,26 +11,37 @@ public class MetrolinkCommandLineApp {
 
     public static void main(String[] varArgs) {
 
-        ApplicationContext context;
-        context = new ClassPathXmlApplicationContext("application-context.xml");
-        MetrolinkCommandLineApp obj;
-        obj = (MetrolinkCommandLineApp) context.getBean("metrolinkCommandLineApp");
+        ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+        MetrolinkCommandLineApp metrolinkCommandLineApp =
+                (MetrolinkCommandLineApp) context.getBean("metrolinkCommandLineApp");
 
-        start();
+
+        metrolinkCommandLineApp.start();
     }
-
     private Validation validation;
 
+    private Stops stops;
+
+
+   // MetrolinkCommandLineApp(Stops metroStops) {
+        //this.metroStops = metroStops;
+    //}
     public MetrolinkCommandLineApp(Validation validation) {
         this.validation = validation;
+    }
+
+    public void setStops(Stops stops) {
+        this.stops = stops;
 
     }
 
-    public static void start() {
+    private void start() {
 
-        Stops metroStops = new Stops();
-        int user_input;
-        metroStops.outputStations();
+        ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+        Stops stops = (Stops) context.getBean("stops");
+
+        int user_Input;
+        stops.outputStations();
         System.out.println("");
         System.out.println("");
         System.out.println("**From the list, please input the number for " +
@@ -38,9 +49,9 @@ public class MetrolinkCommandLineApp {
 
         System.out.println("");
         Scanner console = new Scanner(System.in);
-        user_input= console.nextInt();
+        user_Input= console.nextInt();
 
-        Validation.getValidation(user_input);
+        validation.validate(user_Input);
 
     }
 }
