@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Station {
     private String stationName;
-    private static String id;
+    static String id;
 
     void setName(String name) {
         this.stationName = name;

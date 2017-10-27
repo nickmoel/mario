@@ -1,9 +1,6 @@
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import static junit.framework.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 
 public class StationTest {
@@ -22,27 +19,28 @@ public class StationTest {
 //28 STADIUM METROLINK STATION  29 SUNNEN METROLINK STATION  30 SWANSEA METROLINK STATION
 //31 UMSL NORTH METROLINK STATION  32 UMSL SOUTH METROLINK STATION  33 UNION STA METROLINK STATION
 //34 WASHINGTON PARK METROLINK STATION  35 WELLSTON METROLINK STATION
-    @Autowired
-    Stops metroStops;
-    Validation validation;
-    @Test
 
-    public void stationZero()throws Exception{
+    //Stops metroStops;
+
+    @Test
+   public void stationZero()throws Exception{
         int user_input = 0;
-        int arrival = validation.validate(user_input);
-        assertEquals(0, arrival);
-    }
+        int arrival = Validation.validate(user_input);
+        assertEquals    (0, arrival);
+   }
+
+
 
     @Test
     public void stationZero5thAndMissouri() {
-        assertThat(validation.validate(0), is(0));
+        assertThat(Validation.validate(0), is(0));
 
 
     }
 
     @Test
-    public void stationWellston() {
-        assertThat(validation.validate(35), is(35));
+    public void stationThirtyFiveWellston() {
+        assertThat(Validation.validate(35), is(35));
 
 
     }

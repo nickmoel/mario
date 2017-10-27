@@ -12,16 +12,8 @@ public class SqliteJDBCDao implements MetrolinkDao {
 
     public static final String JDBC_SQLITE_METROLINK_DB = "jdbc:sqlite:metrolink.db";
     public static final String ORG_SQLITE_JDBC = "org.sqlite.JDBC";
-    private static SqliteJDBCDao dao;
 
-    public SqliteJDBCDao(){    }
 
-    public static SqliteJDBCDao getInstance() {
-        if (dao == null) {
-            dao = new SqliteJDBCDao();
-        }
-        return dao;
-    }
 
     public List<Station> getStopsAllStops() {//retrieves stations
 
@@ -37,7 +29,7 @@ public class SqliteJDBCDao implements MetrolinkDao {
             }
             return stops;
         } catch (SQLException e) {
-            throw new RuntimeException("Error retrieving stops");
+            throw new RuntimeException("Error retrieving stops", e);
         }
     }
 

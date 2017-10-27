@@ -1,5 +1,6 @@
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -10,8 +11,15 @@ import java.util.List;
 public class Stops {
     private List<Station> routeStops;
 
-    public Stops() {
-        routeStops = new SqliteJDBCDao().getStopsAllStops();//SqliteJDBCDao.getInstance().getStopsAllStops();
+    private SqliteJDBCDao arrival;
+
+    public Stops (SqliteJDBCDao arrival) {
+        this.arrival = arrival;
+    }
+
+    @PostConstruct
+    public void Stops() {
+        routeStops = new SqliteJDBCDao().getStopsAllStops();
     }
 
     public void outputStations() {//list stations
@@ -28,11 +36,11 @@ public class Stops {
         return routeStops.get(user_Input).getStationName();
     }
 
-    public String getNextArrival(int user_input) {//retrieve next arrival time from user's station
+    public String getNextArrival(int user_input) {
 
        getStationName(user_input);
 
-        List<String> arrivals = new SqliteJDBCDao().getArrivals();//SqliteJDBCDao.getInstance().getArrivals();
+        List<String> arrivals = arrival.getArrivals();
         String arrivalTime = arrivals.get(user_input);
 
         return arrivalTime;

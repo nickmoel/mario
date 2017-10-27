@@ -3,7 +3,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
 
 <bean id = "metrolinkCommandLineApp" class = "MetrolinkCommandLineApp">
                 <constructor-arg ref = "validation"/>
@@ -16,9 +16,13 @@
         </bean>
 
         <bean id = "stops" class = "Stops">
+<constructor-arg ref="sqlJdbc" />
+
 
         </bean>
+<bean id ="sqlJdbc" class="SqliteJDBCDao">
 
+</bean>
 
 
 

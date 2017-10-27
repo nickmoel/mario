@@ -15,17 +15,12 @@ public class MetrolinkCommandLineApp {
         MetrolinkCommandLineApp metrolinkCommandLineApp =
                 (MetrolinkCommandLineApp) context.getBean("metrolinkCommandLineApp");
 
-
         metrolinkCommandLineApp.start();
     }
     private Validation validation;
 
     private Stops stops;
 
-
-   // MetrolinkCommandLineApp(Stops metroStops) {
-        //this.metroStops = metroStops;
-    //}
     public MetrolinkCommandLineApp(Validation validation) {
         this.validation = validation;
     }
