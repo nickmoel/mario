@@ -1,6 +1,7 @@
 import org.junit.Test;
 
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.*;
 
 
 public class StationTest {
@@ -22,16 +23,7 @@ public class StationTest {
 
     //Stops metroStops;
 
-    @Test
-   public void stationZero()throws Exception{
-        int user_input = 0;
-        int arrival = Validation.validate(user_input);
-        assertEquals    (0, arrival);
-   }
-
-
-
-    @Test
+   @Test
     public void stationZero5thAndMissouri() {
         assertThat(Validation.validate(0), is(0));
 
