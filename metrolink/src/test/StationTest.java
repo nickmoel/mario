@@ -49,7 +49,7 @@ public class StationTest {
 
     @Test
     public void stationTwentyFourRockRoadMetrolinkStation() {
-        int stationTwentyFour = 0;
+        int stationTwentyFour = 24;
 
         Stops stops = mock(Stops.class);
         when(stops.getStationName(stationTwentyFour)).thenReturn("ROCK ROAD METROLINK STATION");
