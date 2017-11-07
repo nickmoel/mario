@@ -31,7 +31,7 @@ public class StationTest {
 
         Stops stops = mock(Stops.class);
         when(stops.getStationName(stationZero)).thenReturn("5th and Missouri");
-        when(stops.getNextArrival(stationZero)).thenReturn("8:32 PM");
+        when(stops.getNextArrival(stationZero)).thenReturn("8:30:00");
 
         Validation validation = new Validation();
         validation.setMetroStops(stops);
@@ -53,7 +53,7 @@ public class StationTest {
 
         Stops stops = mock(Stops.class);
         when(stops.getStationName(stationTwentyFour)).thenReturn("ROCK ROAD METROLINK STATION");
-        when(stops.getNextArrival(stationTwentyFour)).thenReturn("11:11 PM");
+        when(stops.getNextArrival(stationTwentyFour)).thenReturn("11:42:00");
 
         Validation validation = new Validation();
         validation.setMetroStops(stops);
