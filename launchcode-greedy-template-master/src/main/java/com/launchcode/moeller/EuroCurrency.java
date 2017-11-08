@@ -6,7 +6,7 @@ package com.launchcode.moeller;
 
 public class EuroCurrency implements Currency {
 
-    private int totalCoins = 0;
+    private int totalCoins;
     private Integer change, dollars;
 
     public int calculateChange(String input_amount) {

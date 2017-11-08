@@ -3,22 +3,22 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id = "greedy" class = "Greedy">
+    <bean id = "greedy" class = "com.launchcode.moeller.Greedy">
         <constructor-arg ref = "currencyChoice"/>
     </bean>
 
-    <bean id = "currencyChoice" class = "CurrencyChoice">
+    <bean id = "currencyChoice" class = "com.launchcode.moeller.CurrencyChoice">
         <constructor-arg ref = "dollar"/>
         <constructor-arg ref = "euro"/>
     </bean>
 
-    <bean id = "dollar" class = "DollarCurrency">
+    <bean id = "dollar" class = "com.launchcode.moeller.DollarCurrency">
 
     </bean>
 
 
 
-    <bean id = "euro" class="EuroCurrency">
+    <bean id = "euro" class="com.launchcode.moeller.EuroCurrency">
     </bean>
 
 </beans>

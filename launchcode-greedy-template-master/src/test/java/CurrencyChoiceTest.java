@@ -2,6 +2,7 @@
  * Created by Nick on 8/19/2017.
  */
 
+import com.launchcode.moeller.CurrencyChoice;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
