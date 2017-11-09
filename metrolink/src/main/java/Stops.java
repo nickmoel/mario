@@ -1,6 +1,9 @@
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,10 +45,29 @@ public class Stops {
 
         List<String> arrivals = arrival.getArrivals();
         String arrivalTime = arrivals.get(user_input);
-
-        return arrivalTime;
+        return convertTime(arrivalTime);
         }
+    public String convertTime(String arrivalTime){
 
+        //input time pattern
+        DateFormat df = new SimpleDateFormat("HH:mm:ss");
+        //Date/time pattern of desired output date
+        DateFormat outputformat = new SimpleDateFormat("hh:mm:ss aa");
+        Date date;
+        String output;
+        try{
+            //Conversion of input String to date
+            date= df.parse(arrivalTime);
+            //old date format to new date format
+            output = outputformat.format(date);
+            //convert output back to arrivalTime
+            arrivalTime = output;
+
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        return arrivalTime;
+    }
 
     }
 

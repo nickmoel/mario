@@ -31,7 +31,7 @@ public class StationTest {
 
         Stops stops = mock(Stops.class);
         when(stops.getStationName(stationZero)).thenReturn("5th and Missouri");
-        when(stops.getNextArrival(stationZero)).thenReturn("8:30:00");
+        when(stops.getNextArrival(stationZero)).thenReturn("8:30:00 AM");
 
         Validation validation = new Validation();
         validation.setMetroStops(stops);
@@ -53,7 +53,7 @@ public class StationTest {
 
         Stops stops = mock(Stops.class);
         when(stops.getStationName(stationTwentyFour)).thenReturn("ROCK ROAD METROLINK STATION");
-        when(stops.getNextArrival(stationTwentyFour)).thenReturn("11:42:00");
+        when(stops.getNextArrival(stationTwentyFour)).thenReturn("11:42:00 AM");
 
         Validation validation = new Validation();
         validation.setMetroStops(stops);
@@ -66,6 +66,28 @@ public class StationTest {
         verify(stops, times(1)).getNextArrival(stationTwentyFour);
         verifyNoMoreInteractions(stops);
     }
+
+
+    @Test
+    public void stationThirtyFourWashingtonParkMetrolinkStation() {
+        int stationThirtyFour = 34;
+
+        Stops stops = mock(Stops.class);
+        when(stops.getStationName(stationThirtyFour)).thenReturn("WASHINGTON PARK METROLINK STATION");
+        when(stops.getNextArrival(stationThirtyFour)).thenReturn("12:02:00 PM");
+
+        Validation validation = new Validation();
+        validation.setMetroStops(stops);
+
+        validation.validate(stationThirtyFour);
+
+
+
+        verify(stops, times(1)).getStationName(stationThirtyFour);
+        verify(stops, times(1)).getNextArrival(stationThirtyFour);
+        verifyNoMoreInteractions(stops);
+    }
+
 
 
 
