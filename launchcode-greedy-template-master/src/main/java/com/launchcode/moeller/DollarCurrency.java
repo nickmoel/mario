@@ -1,17 +1,23 @@
 package com.launchcode.moeller;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Created by Nick on 8/9/2017.
  */
-
+@Component
 public class DollarCurrency implements Currency {
 
     private int totalCoins ;
-    private Integer change, dollars;
+    public int change, dollars;
 
-    public int calculateChange(String input_amount) {
-        dollars = Integer.parseInt(input_amount.substring(1, input_amount.indexOf(".")));
-        change = Integer.parseInt(input_amount.substring(input_amount.length() - 2));
+
+
+    public int calculateChange() {
+     
+       // dollars = Integer.parseInt(input_amount.substring(1, input_amount.indexOf(".")));
+        //change = Integer.parseInt(input_amount.substring(input_amount.length() - 2));
+
         processDollars();
         processQuarters();
         processDimes();
@@ -21,7 +27,11 @@ public class DollarCurrency implements Currency {
     }
 
     public void processDollars() {
+        System.out.println(totalCoins + "total coins before");
         totalCoins = totalCoins + dollars;
+        System.out.println(totalCoins + "dollars");
+        System.out.println(totalCoins + "total coins after");
+
     }
 
     public void processQuarters() {
@@ -43,4 +53,7 @@ public class DollarCurrency implements Currency {
         totalCoins += change / 5;
         change = change % 5;
     }
+
+
+
 }

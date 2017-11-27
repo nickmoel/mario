@@ -9,24 +9,58 @@ import org.springframework.stereotype.Component;
 @Component
 public class CurrencyChoice {
 
-    public CurrencyChoice(DollarCurrency dollarCurrency, EuroCurrency euroCurrency) {
+    private Currency choice;
+    private String input_amount;
+
+
+
+    public void setChoice(Currency choice) {
+        this.choice = choice;
     }
 
-    public static Currency createCurrency(String input_amount) {
+    private CurrencyChoice currencyChoice;
 
-        Currency choice;
-        if (input_amount.startsWith("$")) choice = CurrencyChoice.dollarCurrency();
-        else choice = CurrencyChoice.euroCurrency();
+    public void setCurrencyChoice(CurrencyChoice currencyChoice) {
+        this.currencyChoice = currencyChoice;
+    }
+
+    private DollarCurrency dollarCurrency;
+
+    private EuroCurrency euroCurrency;
+
+    public CurrencyChoice(DollarCurrency dollarCurrency, EuroCurrency euroCurrency) {
+        this.dollarCurrency = dollarCurrency;
+        this.euroCurrency = euroCurrency;
+    }
+
+    public Currency createCurrency(String input_amount) {
+
+        if (input_amount.startsWith("$")) {
+            choice = currencyChoice.dollarCurrency(input_amount);
+        } else choice = currencyChoice.euroCurrency(input_amount);
         return choice;
     }
 
-    public static Currency dollarCurrency() {
+    public Currency dollarCurrency(String input_amount) {
+        parseChange(input_amount);
+        parseDollars(input_amount);
+
+
         return new DollarCurrency();
     }
 
-    public static Currency euroCurrency() {
+    public Currency euroCurrency(String input_amount) {
         return new EuroCurrency();
     }
 
+    public Integer parseDollars(String input_amount) {
+        int dollars = Integer.parseInt(input_amount.substring(1, input_amount.indexOf(".")));
+        return dollars;
+    }
 
+    public Integer parseChange(String input_amount) {
+        int change = Integer.parseInt(input_amount.substring(input_amount.length() - 2));
+        return change;
+
+    }
 }

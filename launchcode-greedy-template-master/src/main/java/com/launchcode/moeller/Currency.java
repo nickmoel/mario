@@ -4,7 +4,8 @@ package com.launchcode.moeller;
  * Created by Nick on 8/9/2017.
  */
 public interface Currency {
-    int calculateChange(String input_amount);
+
+    int calculateChange();
 
     void processDollars();
 
@@ -13,4 +14,6 @@ public interface Currency {
     void processNickles();
 
     void processPennies();
+
+
 }

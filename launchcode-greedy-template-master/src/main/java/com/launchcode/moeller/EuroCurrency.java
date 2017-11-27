@@ -1,17 +1,19 @@
 package com.launchcode.moeller;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Created by Nick on 8/15/2017.
  */
-
+@Component
 public class EuroCurrency implements Currency {
 
     private int totalCoins;
     private Integer change, dollars;
 
-    public int calculateChange(String input_amount) {
-        dollars = Integer.parseInt(input_amount.substring(1, input_amount.indexOf(".")));
-        change = Integer.parseInt(input_amount.substring(input_amount.length() - 2));
+    public int calculateChange() {
+        //dollars = Integer.parseInt(input_amount.substring(1, input_amount.indexOf(".")));
+       // change = Integer.parseInt(input_amount.substring(input_amount.length() - 2));
         processTwoDollars();
         processDollars();
         process_halfEuro();

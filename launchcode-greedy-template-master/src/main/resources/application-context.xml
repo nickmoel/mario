@@ -4,22 +4,36 @@
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <bean id = "greedy" class = "com.launchcode.moeller.Greedy">
+
+        <constructor-arg ref = "validation"/>
+
+    </bean>
+
+    <bean id = "validation" class = "com.launchcode.moeller.Validation">
+
         <constructor-arg ref = "currencyChoice"/>
+
     </bean>
 
     <bean id = "currencyChoice" class = "com.launchcode.moeller.CurrencyChoice">
+
+        <property name="currencyChoice" ref="currencyChoice"/>
+
         <constructor-arg ref = "dollar"/>
+
         <constructor-arg ref = "euro"/>
+
     </bean>
 
     <bean id = "dollar" class = "com.launchcode.moeller.DollarCurrency">
 
     </bean>
 
-
-
     <bean id = "euro" class="com.launchcode.moeller.EuroCurrency">
+
     </bean>
+
+
 
 </beans>
 
