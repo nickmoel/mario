@@ -8,14 +8,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class DollarCurrency implements Currency {
 
-    private int totalCoins ;
+   public int totalCoins ;
     public int change, dollars;
 
 
 
     public int calculateChange() {
      
-       // dollars = Integer.parseInt(input_amount.substring(1, input_amount.indexOf(".")));
+      // dollars = Integer.parseInt(input_amount.substring(1, input_amount.indexOf(".")));
         //change = Integer.parseInt(input_amount.substring(input_amount.length() - 2));
 
         processDollars();

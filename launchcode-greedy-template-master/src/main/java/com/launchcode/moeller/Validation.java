@@ -11,9 +11,6 @@ public class Validation {
 
     private CurrencyChoice currencyChoice;
 
-    int change;
-    int dollars;
-
     public Validation(CurrencyChoice currencyChoice) {
         this.currencyChoice = currencyChoice;
     }

@@ -36,20 +36,18 @@ public class CurrencyChoice {
     public Currency createCurrency(String input_amount) {
 
         if (input_amount.startsWith("$")) {
-            choice = currencyChoice.dollarCurrency(input_amount);
-        } else choice = currencyChoice.euroCurrency(input_amount);
+            choice = currencyChoice.dollarCurrency(parseDollars(input_amount),parseChange(input_amount));
+        } else choice = currencyChoice.euroCurrency(parseDollars(input_amount),parseChange(input_amount));
         return choice;
     }
 
-    public Currency dollarCurrency(String input_amount) {
-        parseChange(input_amount);
-        parseDollars(input_amount);
-
+    public Currency dollarCurrency(Integer dollars, Integer change) {
 
         return new DollarCurrency();
     }
 
-    public Currency euroCurrency(String input_amount) {
+    public Currency euroCurrency(Integer dollars, Integer change) {
+
         return new EuroCurrency();
     }
 
@@ -61,6 +59,5 @@ public class CurrencyChoice {
     public Integer parseChange(String input_amount) {
         int change = Integer.parseInt(input_amount.substring(input_amount.length() - 2));
         return change;
-
     }
 }
