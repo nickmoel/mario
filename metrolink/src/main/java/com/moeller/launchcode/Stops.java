@@ -1,3 +1,6 @@
+package com.moeller.launchcode;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -13,11 +16,16 @@ import java.util.List;
 
 public class Stops {
     private List<Station> routeStops;
-
+@Autowired
     private SqliteJDBCDao arrival;
 
-    public Stops (SqliteJDBCDao arrival) {
-        this.arrival = arrival;
+//    public com.moeller.launchcode.Stops (com.moeller.launchcode.SqliteJDBCDao arrival) {
+//        this.arrival = arrival;
+//    }
+
+
+    public Stops() {
+
     }
 
     @PostConstruct

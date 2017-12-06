@@ -1,3 +1,5 @@
+package com.moeller.launchcode;
+
 import org.springframework.stereotype.Component;
 
 /**

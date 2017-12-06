@@ -1,12 +1,16 @@
+package com.moeller.launchcode;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
 /**
  * Created by Nick on 9/8/2017.
  */
-
+@Component
 public class MetrolinkCommandLineApp {
 
     public static void main(String[] varArgs) {
@@ -17,18 +21,18 @@ public class MetrolinkCommandLineApp {
 
         metrolinkCommandLineApp.start();
     }
+    @Autowired
     private Validation validation;
-
+    @Autowired
     private Stops stops;
 
-    public MetrolinkCommandLineApp(Validation validation) {
-        this.validation = validation;
-    }
+//    public com.moeller.launchcode.MetrolinkCommandLineApp(Validation validation) {
+//        this.validation = validation;
+//    }
 
-    public void setStops(Stops stops) {
-        this.stops = stops;
-
-    }
+//    public void setStops(com.moeller.launchcode.Stops stops) {
+//        this.stops = stops;
+//}
 
     private void start() {
 

@@ -1,3 +1,6 @@
+package com.moeller.launchcode;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -6,13 +9,17 @@ import org.springframework.stereotype.Component;
 @Component
  class Validation {
 
-
+    @Autowired
     Stops metroStops;
 
-    public void setMetroStops(Stops metroStops) {
-        this.metroStops = metroStops;
-    }
+    //public void setMetroStops(com.moeller.launchcode.Stops metroStops) {
+        //this.metroStops = metroStops;
+    //}
 
+
+    public Validation() {
+
+    }
 
     boolean isValid(int userInput) {
         return userInput >= 0 && userInput < 36;
@@ -28,7 +35,7 @@ import org.springframework.stereotype.Component;
         } else {
             //return user_Input;
             System.out.println("Invalid input. ");
-            System.out.println("Please make your METROLINK Station selection from 0-35.");
+            System.out.println("Please make your METROLINK com.moeller.launchcode.Station selection from 0-35.");
             // return user_Input;
         }
 

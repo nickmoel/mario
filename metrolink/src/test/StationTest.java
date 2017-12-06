@@ -8,7 +8,7 @@ import static org.mockito.internal.verification.VerificationModeFactory.times;
 public class StationTest {
 
     /*
-************Station List**************
+************com.moeller.launchcode.Station List**************
 0 5TH & MISSOURI METROLINK STATION
 1 8TH AND PINE METROLINK STATION  2 BELLEVILLE METROLINK STATION  3 BRENTWOOD METROLINK STATION
 4 CENTRAL WEST END METROLINK STATION  5 CIVIC CENTER METROLINK STATION  6 CLAYTON METROLINK STATION
