@@ -7,13 +7,13 @@ import org.springframework.stereotype.Component;
  * Created by Nick on 9/19/2017.
  */
 @Component
- class Validation {
+class Validation {
 
     @Autowired
     Stops metroStops;
 
     //public void setMetroStops(com.moeller.launchcode.Stops metroStops) {
-        //this.metroStops = metroStops;
+    //this.metroStops = metroStops;
     //}
 
 

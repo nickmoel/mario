@@ -39,12 +39,10 @@ public class StationTest {
         validation.validate(stationZero);
 
 
-
         verify(stops, times(1)).getStationName(stationZero);
         verify(stops, times(1)).getNextArrival(stationZero);
         verifyNoMoreInteractions(stops);
     }
-
 
 
     @Test
@@ -59,7 +57,6 @@ public class StationTest {
         validation.setMetroStops(stops);
 
         validation.validate(stationTwentyFour);
-
 
 
         verify(stops, times(1)).getStationName(stationTwentyFour);
@@ -82,13 +79,10 @@ public class StationTest {
         validation.validate(stationThirtyFour);
 
 
-
         verify(stops, times(1)).getStationName(stationThirtyFour);
         verify(stops, times(1)).getNextArrival(stationThirtyFour);
         verifyNoMoreInteractions(stops);
     }
-
-
 
 
     @Test

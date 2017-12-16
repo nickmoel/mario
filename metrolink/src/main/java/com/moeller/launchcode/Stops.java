@@ -16,22 +16,28 @@ import java.util.List;
 
 public class Stops {
     private List<Station> routeStops;
-@Autowired
+    @Autowired
     private SqliteJDBCDao arrival;
 
-//    public com.moeller.launchcode.Stops (com.moeller.launchcode.SqliteJDBCDao arrival) {
+//    public Stops (SqliteJDBCDao arrival) {
 //        this.arrival = arrival;
 //    }
 
 
-    public Stops() {
+//    public Stops() {
+//
+//    }
 
-    }
 
     @PostConstruct
     public void Stops() {
         routeStops = new SqliteJDBCDao().getStopsAllStops();
     }
+
+//   @Transactional
+//    public void Stops() {
+//        routeStops = new SqliteJDBCDao().getStopsAllStops();
+//    }
 
     public void outputStations() {//list stations
         for (int i = 0; i < routeStops.size(); i++) {
@@ -49,12 +55,12 @@ public class Stops {
 
     public String getNextArrival(int user_input) {
 
-       getStationName(user_input);
+        getStationName(user_input);
 
         List<String> arrivals = arrival.getArrivals();
         String arrivalTime = arrivals.get(user_input);
         return convertTime(arrivalTime);
-        }
+    }
     public String convertTime(String arrivalTime){
 
         //input time pattern
@@ -77,7 +83,4 @@ public class Stops {
         return arrivalTime;
     }
 
-    }
-
-
-
+}

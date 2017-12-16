@@ -1,36 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
            http://www.springframework.org/schema/context
-           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           http://www.springframework.org/schema/aop
+	       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	       http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
     <context:component-scan base-package="com.moeller.launchcode"/>
+    <tx:annotation-driven/>
+
+    <context:annotation-config/>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="annotatedClasses">
+            <list>
+                <value>com.moeller.launchcode.Station</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.SQLiteDialect</prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.sqlite.JDBC"/>
+        <property name="url" value="jdbc:sqlite:metrolink.db"/>
+    </bean>
 
 </beans>
 
-<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
-       <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
-       <!--xsi:schemaLocation="http://www.springframework.org/schema/beans-->
-    <!--http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">-->
+        <!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+        <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+        <!--xsi:schemaLocation="http://www.springframework.org/schema/beans-->
+        <!--http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">-->
 
-    <!--<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>-->
+        <!--<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>-->
 
-    <!--<bean id="metrolinkCommandLineApp" class="com.moeller.launchcode.MetrolinkCommandLineApp">-->
+        <!--<bean id="metrolinkCommandLineApp" class="com.moeller.launchcode.MetrolinkCommandLineApp">-->
         <!--<constructor-arg ref="validation"/>-->
         <!--<property name="stops" ref="stops"/>-->
-    <!--</bean>-->
-    <!--<bean id="validation" class="com.moeller.launchcode.Validation">-->
+        <!--</bean>-->
+        <!--<bean id="validation" class="com.moeller.launchcode.Validation">-->
         <!--<property name="metroStops" ref="stops"/>-->
-    <!--</bean>-->
-    <!--<bean id="stops" class="com.moeller.launchcode.Stops">-->
+        <!--</bean>-->
+        <!--<bean id="stops" class="com.moeller.launchcode.Stops">-->
         <!--<constructor-arg ref="sqlJdbc"/>-->
-    <!--</bean>-->
+        <!--</bean>-->
 
-    <!--<bean id="sqlJdbc" class="com.moeller.launchcode.SqliteJDBCDao">-->
-    <!--</bean>-->
+        <!--<bean id="sqlJdbc" class="com.moeller.launchcode.SqliteJDBCDao">-->
+        <!--</bean>-->
 
 
 

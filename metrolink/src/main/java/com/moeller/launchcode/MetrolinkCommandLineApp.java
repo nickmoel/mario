@@ -22,9 +22,9 @@ public class MetrolinkCommandLineApp {
         metrolinkCommandLineApp.start();
     }
     @Autowired
-    private Validation validation;
+    public Validation validation;
     @Autowired
-    private Stops stops;
+    public Stops stops;
 
 //    public com.moeller.launchcode.MetrolinkCommandLineApp(Validation validation) {
 //        this.validation = validation;
