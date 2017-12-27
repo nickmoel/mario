@@ -21,6 +21,8 @@
         <property name="annotatedClasses">
             <list>
                 <value>com.moeller.launchcode.Station</value>
+                <value>com.moeller.launchcode.Stops</value>
+
             </list>
         </property>
         <property name="hibernateProperties">

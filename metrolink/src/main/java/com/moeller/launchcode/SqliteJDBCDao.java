@@ -4,25 +4,28 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.service.spi.ServiceException;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 
-@Component
+@Repository
 public class SqliteJDBCDao implements MetrolinkDao {
 
 
-    //@Autowired
+    @Autowired
     private SessionFactory sessionFactoryBean;
+//    public void setSessionFactory(SessionFactory sessionFactoryBean) {
+//        this.sessionFactoryBean = sessionFactoryBean;
+//    }
 
     public SqliteJDBCDao() {
 
     }
 
 //    public List<Station> getStopsAllStops() {
-//        // @TODO
+//
 //        sessionFactoryBean.getCurrentSession().beginTransaction();
 //        Criteria criteria = sessionFactoryBean.getCurrentSession().createCriteria(Station.class);
 //        List stops = criteria.list();
@@ -31,41 +34,44 @@ public class SqliteJDBCDao implements MetrolinkDao {
 //    }
 
     public List<Station> getStopsAllStops() {
-        try {
-            sessionFactoryBean.getCurrentSession().beginTransaction();
 
-            Criteria criteria = sessionFactoryBean.getCurrentSession().createCriteria(Station.class);
-            List<Station> stops = criteria.list();
-            sessionFactoryBean.getCurrentSession().getTransaction().commit();
-            return stops;
-        } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
-        } finally {
-            if (sessionFactoryBean != null) {
-                sessionFactoryBean.close();
-            }
-        }
+        //try {
+
+        sessionFactoryBean.getCurrentSession().beginTransaction();
+
+        Criteria criteria = sessionFactoryBean.getCurrentSession().createCriteria(Station.class);
+        List stops = criteria.list();
+        sessionFactoryBean.getCurrentSession().getTransaction().commit();
+        return stops;
+//        } catch (Exception e) {
+//            throw new ServiceException(e.getMessage());
+//        } finally {
+//            if (sessionFactoryBean != null) {
+//                sessionFactoryBean.close();
+        // }
+        //}
     }
 
-            public List<Station> getStopsLike (String like){
-                sessionFactoryBean.getCurrentSession().beginTransaction();
-                Criteria criteria = sessionFactoryBean.getCurrentSession().createCriteria(Station.class);
-                criteria.add(Restrictions.like("METROLINK STATION", "%" + like + "%"));
-                List<Station> list = criteria.list();
-                sessionFactoryBean.getCurrentSession().getTransaction().commit();
-                return list;
-            }
 
-            public List<String> getArrivals () {
-                sessionFactoryBean.getCurrentSession().beginTransaction();
-                String sql = "SELECT arrival_time FROM stop_times WHERE stop_id = '" + Station.getID() + "' AND arrival_time > time('now', 'localtime') ORDER BY arrival_time asc;";
-                Criteria criteria = sessionFactoryBean.getCurrentSession().createCriteria(Station.class);
-                Query query = sessionFactoryBean.getCurrentSession().createSQLQuery(sql).addEntity(Station.class).setParameter("station", Station.getID());
-                List<String> arrivals = criteria.list();
-                sessionFactoryBean.getCurrentSession().getTransaction().commit();
-                return arrivals;
-            }
-        }
+    public List<Station> getStopsLike(String like) {
+        sessionFactoryBean.getCurrentSession().beginTransaction();
+        Criteria criteria = sessionFactoryBean.getCurrentSession().createCriteria(Station.class);
+        criteria.add(Restrictions.like("METROLINK STATION", "%" + like + "%"));
+        List<Station> list = criteria.list();
+        sessionFactoryBean.getCurrentSession().getTransaction().commit();
+        return list;
+    }
+
+    public List<String> getArrivals() {
+        sessionFactoryBean.getCurrentSession().beginTransaction();
+        String sql = "SELECT arrival_time FROM stop_times WHERE stop_id = '" + Station.getID() + "' AND arrival_time > time('now', 'localtime') ORDER BY arrival_time asc;";
+        Criteria criteria = sessionFactoryBean.getCurrentSession().createCriteria(Station.class);
+        Query query = sessionFactoryBean.getCurrentSession().createSQLQuery(sql).addEntity(Station.class).setParameter("station", Station.getID());
+        List<String> arrivals = criteria.list();
+        sessionFactoryBean.getCurrentSession().getTransaction().commit();
+        return arrivals;
+    }
+}
 
 
 //import org.springframework.stereotype.Component;

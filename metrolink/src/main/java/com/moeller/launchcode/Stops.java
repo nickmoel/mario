@@ -1,9 +1,9 @@
 package com.moeller.launchcode;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,9 +12,9 @@ import java.util.List;
 /**
  * Created by Nick on 9/21/2017.
  */
-@Component
-
+@Controller
 public class Stops {
+    @Autowired
     private List<Station> routeStops;
     @Autowired
     private SqliteJDBCDao arrival;
@@ -29,15 +29,15 @@ public class Stops {
 //    }
 
 
-    @PostConstruct
-    public void Stops() {
-        routeStops = new SqliteJDBCDao().getStopsAllStops();
-    }
-
-//   @Transactional
-//    public void Stops() {
-//        routeStops = new SqliteJDBCDao().getStopsAllStops();
+//    //@PostConstruct
+//    public void Stops(List routeStops) {
+//        this.routeStops = new SqliteJDBCDao().getStopsAllStops();
 //    }
+
+   @Transactional
+    public void Stops() {
+       routeStops = new SqliteJDBCDao().getStopsAllStops();
+    }
 
     public void outputStations() {//list stations
         for (int i = 0; i < routeStops.size(); i++) {
