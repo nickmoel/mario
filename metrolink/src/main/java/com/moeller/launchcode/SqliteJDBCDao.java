@@ -1,9 +1,7 @@
 package com.moeller.launchcode;
 
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,119 +14,125 @@ public class SqliteJDBCDao implements MetrolinkDao {
 
     @Autowired
     private SessionFactory sessionFactoryBean;
-//    public void setSessionFactory(SessionFactory sessionFactoryBean) {
-//        this.sessionFactoryBean = sessionFactoryBean;
-//    }
+
 
     public SqliteJDBCDao() {
 
     }
 
-//    public List<Station> getStopsAllStops() {
-//
-//        sessionFactoryBean.getCurrentSession().beginTransaction();
-//        Criteria criteria = sessionFactoryBean.getCurrentSession().createCriteria(Station.class);
-//        List stops = criteria.list();
-//        sessionFactoryBean.getCurrentSession().getTransaction().commit();
-//        return stops;
-//    }
 
     public List<Station> getStopsAllStops() {
 
-        //try {
-
         sessionFactoryBean.getCurrentSession().beginTransaction();
+        String sql = "SELECT stops.stop_id, stops.stop_name FROM stops WHERE stop_name LIKE '%METROLINK STATION%' ORDER BY stop_name ASC";
+        // Criteria criteria = sessionFactoryBean.getCurrentSession().createCriteria(Station.class);
+        Query query = sessionFactoryBean.getCurrentSession().createSQLQuery(sql).addEntity(Station.class);
+        List<Station> arrivals =query.list();
 
-        Criteria criteria = sessionFactoryBean.getCurrentSession().createCriteria(Station.class);
-        List stops = criteria.list();
         sessionFactoryBean.getCurrentSession().getTransaction().commit();
-        return stops;
-//        } catch (Exception e) {
-//            throw new ServiceException(e.getMessage());
-//        } finally {
-//            if (sessionFactoryBean != null) {
-//                sessionFactoryBean.close();
-        // }
-        //}
+
+        return arrivals;
+
     }
 
-
-    public List<Station> getStopsLike(String like) {
-        sessionFactoryBean.getCurrentSession().beginTransaction();
-        Criteria criteria = sessionFactoryBean.getCurrentSession().createCriteria(Station.class);
-        criteria.add(Restrictions.like("METROLINK STATION", "%" + like + "%"));
-        List<Station> list = criteria.list();
-        sessionFactoryBean.getCurrentSession().getTransaction().commit();
-        return list;
-    }
 
     public List<String> getArrivals() {
         sessionFactoryBean.getCurrentSession().beginTransaction();
-        String sql = "SELECT arrival_time FROM stop_times WHERE stop_id = '" + Station.getID() + "' AND arrival_time > time('now', 'localtime') ORDER BY arrival_time asc;";
-        Criteria criteria = sessionFactoryBean.getCurrentSession().createCriteria(Station.class);
-        Query query = sessionFactoryBean.getCurrentSession().createSQLQuery(sql).addEntity(Station.class).setParameter("station", Station.getID());
-        List<String> arrivals = criteria.list();
+        String sql = "SELECT arrival_time FROM stop_times WHERE stop_id LIKE :station AND arrival_time > time('now', 'localtime') ORDER BY arrival_time asc;";
+//:station
+        Query query = sessionFactoryBean.getCurrentSession()
+                .createSQLQuery(sql)
+                .addEntity(Station.class);
+
+        query.setParameter("station", Station.getID());
+        List <String> arrivals = query.list();
         sessionFactoryBean.getCurrentSession().getTransaction().commit();
+        System.out.print(arrivals);
         return arrivals;
+
     }
 }
 
 
-//import org.springframework.stereotype.Component;
+//    public ArrayList<Time> getStationArrivals(int stationID)
+//    {
+//        sessionFactory.getCurrentSession().beginTransaction();
+//        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Arrival.class);
+//        criteria.add(Restrictions.eq("stop_id", stationID));
+//        @SuppressWarnings("unchecked")
+//        List<Arrival> list = criteria.list();
+//        sessionFactory.getCurrentSession().getTransaction().commit();
 //
-//import java.sql.*;
-//import java.util.ArrayList;
-//import java.util.List;
-//
-///**
-// * Created by Nick on 9/8/2017.
-// */
-//@Component
-//public class SqliteJDBCDao implements MetrolinkDao {
-//
-//    public static final String JDBC_SQLITE_METROLINK_DB = "jdbc:sqlite:metrolink.db";
-//    public static final String ORG_SQLITE_JDBC = "org.sqlite.JDBC";
-//
-//
-//    public List<Station> getStopsAllStops() {//retrieves stations
-//
-//        try (Connection connection = getConnection()) {
-//            PreparedStatement preparedStatement = connection.prepareStatement("SELECT stops.stop_id, stops.stop_name FROM stops WHERE stop_name LIKE '%METROLINK STATION%' ORDER BY stop_name ASC");
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            List<Station> stops = new ArrayList<>();
-//            while (resultSet.next()) {
-//                Station nextStop = new Station();
-//                nextStop.setName(resultSet.getString("stop_name"));
-//                nextStop.setID(resultSet.getString("stop_id"));
-//                stops.add(nextStop);
-//            }
-//            return stops;
-//        } catch (SQLException e) {
-//            throw new RuntimeException("Error retrieving stops", e);
-//        }
+//        return convertArrivals(list);
 //    }
+
+
+
+
+
+
+
+
+
+
+        //.setParameter("station", "%Station.getID()%");
+
+
+
+
+
+
+//        List<?> resultRaw = query.list();
+//        List<String> arrivalTimes = new ArrayList<String>(resultRaw.size());
+//        for (Object a : resultRaw) {
+//          arrivalTimes.add((String) a);
+      // }
+//        return arrivalTimes;
+
+        //List<String> arrivalTimes = query.list();
+
+        //arrivalTimes.forEach(System.out::println);
+        //System.out.print(arrivalTimes);
+
+
 //
-//    public List<String> getArrivals() {//retrieves arrival times
-//        try (Connection conn = getConnection()) {
-//            PreparedStatement statement = conn.prepareStatement("SELECT arrival_time FROM stop_times WHERE stop_id = '" + Station.getID()"' AND arrival_time > time('now', 'localtime') ORDER BY arrival_time asc;");
-//            ResultSet resultSet = statement.executeQuery();
-//            List<String> arrivals = new ArrayList<String>();
-//            while (resultSet.next()) {
-//                arrivals.add(resultSet.getString("arrival_time"));
-//            }
-//            return arrivals;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            throw new RuntimeException("Unable to find Database", e);
-//        }
-//    }
+//        System.out.print(resultRaw);
 //
-//    private static Connection getConnection() throws SQLException {
-//        try {
-//            Class.forName(ORG_SQLITE_JDBC);
-//        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException("Unable to find class for loading the database", e);
+//
+
+
+
+
+
+
+       // System.out.println(arrivalTimes.toString(list.toArray()));
+
+//        for(String string : arrivalTimes) {
+//            System.out.println(Station.getID());
 //        }
-//        return DriverManager.getConnection(JDBC_SQLITE_METROLINK_DB);
-//    }
-//}
+
+
+//        String arrivals = arrivalTimes.get(0);
+
+        //return arrivals;
+
+
+
+
+
+
+
+
+
+
+//        String sql = "SELECT arrival_time FROM stop_times WHERE stop_id = '" + myStation.getID() + "' AND arrival_time > time('now', 'localtime') ORDER BY arrival_time asc;";
+//        Query query = sessionFactoryBean.getCurrentSession().createSQLQuery(sql).addEntity(Station.class);
+//        List<String> arrivals = query.list();
+//
+//        sessionFactoryBean.getCurrentSession().getTransaction().commit();
+//        System.out.println(arrivals);
+//        return arrivals;
+
+
+
+

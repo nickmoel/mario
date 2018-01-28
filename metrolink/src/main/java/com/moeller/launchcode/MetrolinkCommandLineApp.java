@@ -37,7 +37,7 @@ public class MetrolinkCommandLineApp {
     private void start() {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
-        Stops stops = (Stops) context.getBean("stops");
+        //Stops stops = (Stops) context.getBean("stops");
 
         int user_Input;
         stops.outputStations();

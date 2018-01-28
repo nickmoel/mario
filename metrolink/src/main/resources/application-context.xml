@@ -18,11 +18,11 @@
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+
         <property name="annotatedClasses">
             <list>
                 <value>com.moeller.launchcode.Station</value>
-                <value>com.moeller.launchcode.Stops</value>
-
+                <value>com.moeller.launchcode.Arrival</value>
             </list>
         </property>
         <property name="hibernateProperties">

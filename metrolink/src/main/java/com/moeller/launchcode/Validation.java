@@ -35,7 +35,7 @@ class Validation {
         } else {
             //return user_Input;
             System.out.println("Invalid input. ");
-            System.out.println("Please make your METROLINK com.moeller.launchcode.Station selection from 0-35.");
+            System.out.println("Please make your METROLINK Station selection from 0-35.");
             // return user_Input;
         }
 
