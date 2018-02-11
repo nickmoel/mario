@@ -20,112 +20,84 @@ public class Stops {
     @Autowired
     public List<Station> routeStops;
     List<Station> routeStops1;
+    //public List <Arrival> stopTimes;
     @Autowired
-    private SqliteJDBCDao arrival;
+    private SqliteJDBCDao arrival;//*
     private String arrivalTime;
-    //private MetrolinkDAO databaseReader;
-
-//    public Stops (SqliteJDBCDao arrival) {
-//        this.arrival = arrival;
-//    }
-
-
-//    public Stops() {
-//          routeStops = new SqliteJDBCDao(). getStopsAllStops();
-//    }
-
-
-//    @PostConstruct
-//    public void Stops() {
-//        this.routeStops = new SqliteJDBCDao().getStopsAllStops();
-//    }
 
 
     public void Stops() {
 
     }
 
-    public void outputStations() {//list stations
+    public List<Station> outputStations() {//list stations
+
         List<Station> routeStops = arrival.getStopsAllStops();
-        for (int i = 0; i < routeStops.size(); i++) {
-            int y = i;
-            System.out.print(y + " " + routeStops.get(i).getStationName() + "  ");
-            if (y % 3 == 0) {
-                System.out.println();
+
+        for (Station station : routeStops) {
+            System.out.println(station.getStopID() + " " + station.getStopName());
+        }
+        return routeStops;
+//        for (int i = 0; i < routeStops.size(); i++) {
+//            int y = i;
+//            System.out.print(y + " " + routeStops.get(i).getStopName() + "  ");
+//            if (y % 3 == 0) {
+//                System.out.println();
+//            }
+//        }
+    }
+
+//    public void setID(int user_Input) {// retrieve station id using user input from stored list
+//       // List<Station> routeStops = arrival.getStopsAllStops();
+//        List<Station> routeStops = arrival.getStopsAllStops();
+//        routeStops.get(user_Input).setID(user_Input);
+//
+//    }
+
+    public Station getStationName(int user_Input) {// retrieve station name using user input from stored list
+       // List<Station> routeStops = outputStations();
+                //arrival.getStopsAllStops();
+        //List<Stop> stops = getMetroLinkStations();
+       // appOutput.print("Enter the ID of your current station:");
+
+        for(Station station : routeStops) {
+            if(station.getStopID()==user_Input) {
+                return station;
             }
         }
+        return null;
     }
 
-    public void setID(int user_Input) {// retrieve station id using user input from stored list
-       // List<Station> routeStops = arrival.getStopsAllStops();
-        List<Station> routeStops = arrival.getStopsAllStops();
-        routeStops.get(user_Input).setID(user_Input);
 
-    }
+    public String getNextArrival(int user_Input) {
 
-    public String getStationName(int user_Input) {// retrieve station name using user input from stored list
-        List<Station> routeStops = arrival.getStopsAllStops();
-        return routeStops.get(user_Input).getStationName();
-
-    }
-
-    public Integer getID() {
-        Integer id = Station.getID();
-        // List<Station> routeStops = arrival.getStopsAllStops();
-        return id;
-
-    }
-
-    public String getNextArrival(int user_input) {
-
-//        Station current = readUserStation();
-//        if(current.getName().equalsIgnoreCase(RETURN))
-//            break;
-//        //ArrayList<Time> times = databaseReader.getStationArrivals(current.getId());
-//        Time currentTime  = Time.getCurrent();
-//        Time untilArrival = times.get(0);
-//        for(Time t: times)
-//            if(currentTime.until(t).earlierThan(untilArrival))
-//                untilArrival = currentTime.until(t);
-//        System.out.println("Next arrival in " + untilArrival.toString() + ".");
-//        break;
-
-
-        //getStationName(user_input);
-        setID(user_input);
-        Integer id = getID();
-        System.out.print("user input " + id);
-
-        List<String> times = arrival.getArrivals();
-        String arrivalTime = arrival.toString();
-
-       
+        Station stop = getStationName(user_Input);
+        String arrivalTime = arrival.getArrivals(stop);
+        //appOutput.print("The next train will arrive at " + formatStationTime(arrivalTime.getArrivalTime()));
+//        arrivalTime.toString();
         return convertTime(arrivalTime);
     }
 
+        public String convertTime(String arrivalTime) {
 
+            //input time pattern
+            DateFormat df = new SimpleDateFormat("HH:mm:ss");
+            //Date/time pattern of desired output date
+            DateFormat outputformat = new SimpleDateFormat("hh:mm:ss aa");
+            Date date;
+            String output;
+            try{
+                //Conversion of input String to date
+                date= df.parse(arrivalTime);
+                //old date format to new date format
+                output = outputformat.format(date);
+                //convert output back to arrivalTime
+                arrivalTime = output;
 
-
-    public String convertTime(String arrivalTime) {
-        System.out.print(arrivalTime);
-        //input time pattern
-        DateFormat df = new SimpleDateFormat("HH:mm:ss");
-        //Date/time pattern of desired output date
-        DateFormat outputformat = new SimpleDateFormat("hh:mm:ss aa");
-        Date date;
-        String output;
-        try {
-            //Conversion of input String to date
-            date = df.parse(arrivalTime);
-            //old date format to new date format
-            output = outputformat.format(date);
-            //convert output back to arrivalTime
-            arrivalTime = output;
-
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
+            } catch (java.text.ParseException e) {
+                e.printStackTrace();
+            }
+            return arrivalTime;
         }
-        return arrivalTime;
-    }
 
 }

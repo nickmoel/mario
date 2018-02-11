@@ -22,7 +22,10 @@
         <property name="annotatedClasses">
             <list>
                 <value>com.moeller.launchcode.Station</value>
-                <value>com.moeller.launchcode.Arrival</value>
+                <value>com.moeller.launchcode.StopTimes</value>
+
+
+
             </list>
         </property>
         <property name="hibernateProperties">

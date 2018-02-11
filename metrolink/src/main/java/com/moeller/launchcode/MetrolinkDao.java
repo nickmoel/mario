@@ -8,7 +8,7 @@ import java.util.List;
 public interface MetrolinkDao {
     public List<Station> getStopsAllStops();
 
-    public List<String> getArrivals();
+    public String getArrivals(Station routeStops);
 
 
 

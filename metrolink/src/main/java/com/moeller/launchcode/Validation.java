@@ -11,7 +11,7 @@ class Validation {
 
     @Autowired
     Stops metroStops;
-
+    Station routeStops;
     //public void setMetroStops(com.moeller.launchcode.Stops metroStops) {
     //this.metroStops = metroStops;
     //}
@@ -22,7 +22,7 @@ class Validation {
     }
 
     boolean isValid(int userInput) {
-        return userInput >= 0 && userInput < 36;
+        return userInput >= 10599 && userInput <= 14761;
     }
 
     String getNextStationArrival(int user_Input) {
@@ -35,7 +35,7 @@ class Validation {
         } else {
             //return user_Input;
             System.out.println("Invalid input. ");
-            System.out.println("Please make your METROLINK Station selection from 0-35.");
+            System.out.println("Please make your METROLINK STATION selection from the STATION 5-Digit number.");
             // return user_Input;
         }
 

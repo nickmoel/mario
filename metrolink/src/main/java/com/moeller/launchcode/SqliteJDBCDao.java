@@ -24,7 +24,7 @@ public class SqliteJDBCDao implements MetrolinkDao {
     public List<Station> getStopsAllStops() {
 
         sessionFactoryBean.getCurrentSession().beginTransaction();
-        String sql = "SELECT stops.stop_id, stops.stop_name FROM stops WHERE stop_name LIKE '%METROLINK STATION%' ORDER BY stop_name ASC";
+        String sql = "SELECT stops.stop_id, stops.stop_name FROM stops WHERE stop_name LIKE '%METROLINK STATION%' ORDER BY stop_id ASC";
         // Criteria criteria = sessionFactoryBean.getCurrentSession().createCriteria(Station.class);
         Query query = sessionFactoryBean.getCurrentSession().createSQLQuery(sql).addEntity(Station.class);
         List<Station> arrivals =query.list();
@@ -36,19 +36,15 @@ public class SqliteJDBCDao implements MetrolinkDao {
     }
 
 
-    public List<String> getArrivals() {
+    public String getArrivals(Station stop) {
         sessionFactoryBean.getCurrentSession().beginTransaction();
-        String sql = "SELECT arrival_time FROM stop_times WHERE stop_id LIKE :station AND arrival_time > time('now', 'localtime') ORDER BY arrival_time asc;";
+        String sql = "SELECT arrival_time FROM stop_times WHERE stop_id LIKE :station AND arrival_time > time('now', 'localtime') ORDER BY arrival_time asc LIMIT 1;";
 //:station
-        Query query = sessionFactoryBean.getCurrentSession()
-                .createSQLQuery(sql)
-                .addEntity(Station.class);
-
-        query.setParameter("station", Station.getID());
-        List <String> arrivals = query.list();
+        Query query = sessionFactoryBean.getCurrentSession().createSQLQuery(sql).addEntity(StopTimes.class).setParameter("station", stop.getStopID());
+        List <String> arrivalTimes = query.list();
         sessionFactoryBean.getCurrentSession().getTransaction().commit();
-        System.out.print(arrivals);
-        return arrivals;
+        System.out.print(arrivalTimes);
+        return arrivalTimes.get(0);
 
     }
 }
