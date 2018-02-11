@@ -9,42 +9,32 @@ import javax.persistence.*;
  */
 
 
-
 @Component
 @Entity
 @Table(name = "stops")
 public class Station {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "stop_id", unique = true, nullable = false)
-    private Integer stopID;
-    @Column(name = "stop_name")
-    private String stopName;
+    public Integer id;
 
-
+    @Column(name = "stop_name", unique = true, nullable = false)
+    public String Name;
 
     public Station() {
-
     }
 
-    public void setStopName(String stopName){
-        this.stopName = stopName;
+    void setID(Integer id) {
+        this.id = id;
     }
 
-
-
-    public void setStopID(int stopID) {
-        this.stopID = stopID;
+    String getStationName() {
+        return Name;
     }
 
-    public String getStopName() {
-        return stopName;
+    Integer getId() {
+        return id;
     }
 
 
-
-    public Integer getStopID(){
-        return stopID;
-    }
 }

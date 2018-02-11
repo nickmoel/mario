@@ -26,18 +26,9 @@ public class MetrolinkCommandLineApp {
     @Autowired
     public Stops stops;
 
-//    public com.moeller.launchcode.MetrolinkCommandLineApp(Validation validation) {
-//        this.validation = validation;
-//    }
-
-//    public void setStops(com.moeller.launchcode.Stops stops) {
-//        this.stops = stops;
-//}
-
     private void start() {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
-        //Stops stops = (Stops) context.getBean("stops");
 
         int user_Input;
         stops.outputStations();

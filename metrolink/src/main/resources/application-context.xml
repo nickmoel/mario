@@ -22,10 +22,6 @@
         <property name="annotatedClasses">
             <list>
                 <value>com.moeller.launchcode.Station</value>
-                <value>com.moeller.launchcode.StopTimes</value>
-
-
-
             </list>
         </property>
         <property name="hibernateProperties">
@@ -46,27 +42,4 @@
     </bean>
 
 </beans>
-
-        <!--<beans xmlns="http://www.springframework.org/schema/beans"-->
-        <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
-        <!--xsi:schemaLocation="http://www.springframework.org/schema/beans-->
-        <!--http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">-->
-
-        <!--<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>-->
-
-        <!--<bean id="metrolinkCommandLineApp" class="com.moeller.launchcode.MetrolinkCommandLineApp">-->
-        <!--<constructor-arg ref="validation"/>-->
-        <!--<property name="stops" ref="stops"/>-->
-        <!--</bean>-->
-        <!--<bean id="validation" class="com.moeller.launchcode.Validation">-->
-        <!--<property name="metroStops" ref="stops"/>-->
-        <!--</bean>-->
-        <!--<bean id="stops" class="com.moeller.launchcode.Stops">-->
-        <!--<constructor-arg ref="sqlJdbc"/>-->
-        <!--</bean>-->
-
-        <!--<bean id="sqlJdbc" class="com.moeller.launchcode.SqliteJDBCDao">-->
-        <!--</bean>-->
-
-
 
