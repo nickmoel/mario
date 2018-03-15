@@ -1,9 +1,9 @@
 
-# Mario/ STL METROLINK STATION NEXT ARRIVAL TIME CHECKER v0.7.4
+# Mario/ STL METROLINK STATION NEXT ARRIVAL TIME CHECKER v0.7.5
 
 ![Alt Text](https://i.imgur.com/8FgOAd5.gif)
 
-Launch Code Self guided Java Exercises PSET7 v0.7.4. Transitioning from JDBC to HIBERNATE.This final Problem uses my solution for PSET6 as a base.
+Launch Code Self guided Java Exercises PSET7 v0.7.5. Transitioning from JDBC to HIBERNATE.This final Problem uses my solution for PSET6 as a base.
 
 Run the program, pick the METROLINK STATION that you want the next arrival time for and that's it!
 
