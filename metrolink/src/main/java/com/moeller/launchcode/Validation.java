@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * Created by Nick on 9/19/2017.
  */
 @Component
-class Validation {
+public class Validation {
 
     @Autowired
     Stops metroStops;
@@ -16,7 +16,7 @@ class Validation {
 
     }
 
-    boolean isValid(int userInput) {
+    public boolean isValid(int userInput) {
         return userInput >= 0 && userInput < 36;
     }
 
@@ -24,7 +24,7 @@ class Validation {
         return "The next arrival at " + metroStops.getStationName(user_Input) + " is at " + metroStops.getNextArrival(user_Input);
     }
 
-    void validate(int user_Input) {
+    public void validate(int user_Input) {
         if (isValid(user_Input)) {
             System.out.println(getNextStationArrival(user_Input));
         } else {
@@ -34,5 +34,9 @@ class Validation {
 
         }
 
+    }
+
+    public void setMetroStops(Stops metroStops) {
+        this.metroStops = metroStops;
     }
 }
