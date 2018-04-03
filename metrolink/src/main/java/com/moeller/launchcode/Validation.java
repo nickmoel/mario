@@ -16,7 +16,7 @@ public class Validation {
 
     }
 
-    public boolean isValid(int userInput) {
+    public boolean isValid(int userInput) {//returns true if user input is within range
         return userInput >= 0 && userInput < 36;
     }
 
@@ -24,19 +24,18 @@ public class Validation {
         return "The next arrival at " + metroStops.getStationName(user_Input) + " is at " + metroStops.getNextArrival(user_Input);
     }
 
-    public void validate(int user_Input) {
+    public String validate(int user_Input) {
         if (isValid(user_Input)) {
-            System.out.println(getNextStationArrival(user_Input));
+           return (getNextStationArrival(user_Input));
         } else {
 
-            System.out.println("Invalid input. ");
-            System.out.println("Please make your METROLINK Station selection from 0-35.");
+            return("Invalid input. Please make your METROLINK Station selection from 0-35.");
 
         }
 
     }
 
-    public void setMetroStops(Stops metroStops) {
+    public void setMetroStops(Stops metroStops) {//for mock object
         this.metroStops = metroStops;
     }
 }

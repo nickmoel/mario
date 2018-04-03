@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class Stops {
 
     @Autowired
     public List<Station> routeStops;
-    List<Station> routeStops1;
+
     @Autowired
     private SqliteJDBCDao arrival;
     private String arrivalTime;
@@ -29,16 +30,18 @@ public class Stops {
 
     }
 
-    public void outputStations() {//list stations
-        List<Station> routeStops = arrival.getStopsAllStops();
-        for (int i = 0; i < routeStops.size(); i++) {
-            int y = i;
-            System.out.print(y + " " + routeStops.get(i).getStationName() + "  ");
-            if (y % 3 == 0) {
-                System.out.println();
-            }
+
+        public List<String> outputStations() {//list stations
+            List<String> stations = new ArrayList<String>();
+            List<Station> routeStops = arrival.getStopsAllStops();
+            for (int i = 0; i < routeStops.size(); i++) {
+                int y = i;
+               stations.add(y + " " + routeStops.get(i).getStationName() + "  ");
+
+                }
+            return stations;
         }
-    }
+
 
     public String getStationName(int user_Input) {// retrieve station name using user input from stored list
         List<Station> routeStops = arrival.getStopsAllStops();
