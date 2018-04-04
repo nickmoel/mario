@@ -11,7 +11,6 @@ public class Validation {
 
     @Autowired
     Stops metroStops;
-
     public Validation() {
 
     }
@@ -21,16 +20,23 @@ public class Validation {
     }
 
     String getNextStationArrival(int user_Input) {
-        return "The next arrival at " + metroStops.getStationName(user_Input) + " is at " + metroStops.getNextArrival(user_Input);
+
+        String stationName= metroStops.getStationName(user_Input);
+        String nextArrival = metroStops.getNextArrival(user_Input);
+        String nextStationArrival = " The next arrival at " + stationName + " is at " + nextArrival;
+        return nextStationArrival;
+        //return "Next arrival at " + metroStops.getStationName(user_Input) + " is at " + metroStops.getNextArrival(user_Input);
     }
 
     public String validate(int user_Input) {
         if (isValid(user_Input)) {
-           return (getNextStationArrival(user_Input));
+           String nextStation = getNextStationArrival(user_Input);
+            return nextStation;
+
         } else {
-
-            return("Invalid input. Please make your METROLINK Station selection from 0-35.");
-
+            String invalid = ("Invalid input. Please make your METROLINK Station selection from 0-35.");
+           // return("Invalid input. Please make your METROLINK Station selection from 0-35.");
+return invalid;
         }
 
     }

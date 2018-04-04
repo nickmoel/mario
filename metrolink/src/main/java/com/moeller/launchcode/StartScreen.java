@@ -1,108 +1,113 @@
 package com.moeller.launchcode;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 @Component
+public class StartScreen extends JFrame {
 
-public class StartScreen {
-    public StartScreen(){
+    static JFrame frame;
+
+    @Autowired
+    Stops stops;
+    @Autowired
+    Validation validation;
+
+    public void mainFrame() {
+        // schedule this for the event dispatch thread (edt)
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                displayJFrame();
+            }
+        });
+    }
+
+    void displayJFrame() {
+        frame = new JFrame("METROLINK STATION ARRIVAL TIMES");
+
+        // create components
+        JLabel instruction = new JLabel("Input the number for the METROLINK STATION that you wish to see the next arrival time for");
+        instruction.setForeground(Color.RED);
+        //instruction.setBorder(new LineBorder(Color.red, 1));
+        JList list;
+        list = new JList(stops.outputStations().toArray(new String[0]));
+
+        JLabel instruction2 = new JLabel("Input METROLINK STATION #");
+
+        JTextField input = new JTextField(2);
+        //input.setText("0-35");
+        input.setBorder(new LineBorder(Color.red, 1));
+        //input.setEditable(false);
+        input.setInputVerifier(new InputVerifier() {
+            int MAX = 35;
+            int MIN = 0;
+            @Override
+
+            public boolean verify(JComponent input) {//adding Validator for integers in the correct range
+                String text = ((JTextField) input).getText();
+                int num = 0;
+                try {
+                    num = Integer.parseInt(text);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showOptionDialog(null, "Not a Number", "Not a Number", JOptionPane.DEFAULT_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE, null, null, null);
+
+                }
+                if (text.equals("")||
+                        num <= MAX && num >= MIN)
+                    return true;
+                JOptionPane.showOptionDialog(null, "Invalid input. Please make your METROLINK Station selection from 0-35.", "Not a Valid Number", JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE, null, null, null);
+
+                return false;
+            }
+        });
 
 
 
-        }
+        JTextArea output = new JTextArea(1, 40);
+        output.setBorder(new LineBorder(Color.red, 1));
 
-    public void  build(){
-        // Define frame, label and panel
+        JButton jb1;
+        jb1 = new JButton("Click here to get the Arrival Time");
 
-        JFrame frame = new JFrame("Hello Swing");
+        // add the listener to the jbutton to handle the "pressed" event
+        jb1.addActionListener((ActionEvent e) -> {
+            int user_Input = Integer.parseInt(input.getText());
 
-        JLabel label = new JLabel("I'm a JLabel", JLabel.CENTER);
+            String nextStationArrival = validation.getNextStationArrival(user_Input);
 
-        JPanel panel = new JPanel();
-
-        JTextField userInput = new JTextField("Station Selection");
-
-
-        // Setting for the panel
-
-        BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
-
-        panel.setLayout(boxlayout);
-
-        panel.setBorder(new EmptyBorder(new Insets(45, 70, 45, 70)));
+            output.setText(nextStationArrival); //display station and time in the output textarea
 
 
-        // Define new buttons
+        });
 
-        JButton jb1 = new JButton("Button 1");
+        // put the components on the frame
+        frame.getContentPane().setLayout(new FlowLayout());
+        frame.add(instruction);
+        frame.add(list);
+        frame.add(instruction2);
+        frame.add(input);
+        frame.add(output);
+        frame.add(jb1);
 
-        JButton jb2 = new JButton("Button 2");
-
-        JButton jb3 = new JButton("Button 3");
-
-
-
-        // Add buttons to the frame (and spaces between buttons)
-
-        panel.add(jb1);
-
-        panel.add(jb2);
-
-        panel.add(jb3);
-
-        panel.add(userInput);
-
-        // Add the label and panel to the frame
-
-        frame.setLayout(new GridLayout(2, 1));
-
-        frame.add(label);
-
-        frame.add(panel);
-
-
-
-        // Settings for the frame
-
+        // set up the jframe, then display it
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(800, 800));
         frame.pack();
-
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        input.requestFocusInWindow() ;
+    }
+}
 
 
-    }
-//    public class txtInputListener implements ActionListener    {
-//        public void actionPerformed(ActionEvent event)
-//        {
-//            input = user.getText();   //receive input from text field
-//            System.out.println(input);
-//        }
-//    }
-    }
-//        JFrame frame = new JFrame();
-//        frame.add( new JLabel(" Outout" ), BorderLayout.NORTH );
-//
-//        JTextArea ta = new JTextArea();
-//        TextAreaOutputStream taos = new TextAreaOutputStream( ta, 60 );
-//        PrintStream ps = new PrintStream( taos );
-//        System.setOut( ps );
-//        System.setErr( ps );
-//
-//
-//        frame.add( new JScrollPane( ta )  );
-//
-//        frame.pack();
-//        frame.setVisible( true );
-//        frame.setSize(800,600);
-//
-//        for( int i = 0 ; i < 100 ; i++ ) {
-//            System.out.println( i );
-//            Thread.sleep( 500 );
-//        }
-//    }
-//}
+
+
+
+

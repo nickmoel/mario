@@ -13,8 +13,17 @@ import org.springframework.stereotype.Component;
 
 public class MetrolinkCommandLineApp { //class is a blueprint used to make objects
 
-    public static void main(String[] varArgs) {
+    @Autowired //@Autowired annotation tells Spring where an injection needs to occur.
 
+    public Validation validation;// Tells the application context to inject an instance of Validation here
+    @Autowired //@Autowired annotation tells Spring where an injection needs to occur.
+
+    public Stops stops;// Tells the application context to inject an instance of Stops here
+    @Autowired
+
+    public StartScreen screen;
+
+    public static void main(String[] varArgs) {
 
 
         ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
@@ -25,23 +34,10 @@ public class MetrolinkCommandLineApp { //class is a blueprint used to make objec
 
         metrolinkCommandLineApp.start();
     }
-    @Autowired //@Autowired annotation tells Spring where an injection needs to occur.
-
-    public Validation validation;// Tells the application context to inject an instance of Validation here
-
-    @Autowired //@Autowired annotation tells Spring where an injection needs to occur.
-
-    public Stops stops;// Tells the application context to inject an instance of Stops here
-
-    @Autowired
-
-    public GUI screen;
-
-
 
     private void start() {
 
-    screen.run();
+        screen.mainFrame();
 
     }
 

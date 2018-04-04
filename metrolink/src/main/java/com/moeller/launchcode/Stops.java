@@ -23,7 +23,7 @@ public class Stops {
 
     @Autowired
     private SqliteJDBCDao arrival;
-    private String arrivalTime;
+//     String arrivalTime;
 
 
     public void Stops() {
@@ -45,9 +45,9 @@ public class Stops {
 
     public String getStationName(int user_Input) {// retrieve station name using user input from stored list
         List<Station> routeStops = arrival.getStopsAllStops();
-
-        return routeStops.get(user_Input).getStationName();
-
+String stationName = routeStops.get(user_Input).getStationName();
+        //return routeStops.get(user_Input).getStationName();
+return stationName;
     }
 
     public String getNextArrival(int user_input) {
@@ -55,8 +55,8 @@ public class Stops {
         Station station = routeStops.get(user_input);
         List<String> times = arrival.getArrivals(station);
         String arrivalTime = times.get(0);
-
-        return convertTime(arrivalTime);
+String arrival_Time = convertTime(arrivalTime);
+        return arrival_Time;
     }
 
 
